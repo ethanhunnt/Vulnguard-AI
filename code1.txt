@@ -1,0 +1,42 @@
+https://github.com/uclouvain/openjpeg/issues/1088
+https://github.com/uclouvain/openjpeg/blob/06f7d412435ddb62f8e9935af7e306783bc4b75b/src/bin/mj2/opj_mj2_extract.c#L143
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7648
+
+int main(int argc, char *argv[])
+{
+	opj_dinfo_t* dinfo;
+    opj_event_mgr_t event_mgr;      /* event manager */
+    int tnum;
+    unsigned int snum;
+    opj_mj2_t *movie;
+    mj2_tk_t *track;
+    mj2_sample_t *sample;
+    unsigned char* frame_codestream;
+    FILE *file, *outfile;
+    char outfilename[50];
+    mj2_dparameters_t parameters;
+
+    if (argc != 3) {
+        printf("Usage: %s mj2filename output_location\n", argv[0]);
+        printf("Example: %s foreman.mj2 output/foreman\n", argv[0]);
+        return 1;
+    }
+
+    file = fopen(argv[1], "rb");
+
+    if (!file) {
+        fprintf(stderr, "failed to open %s for reading\n", argv[1]);
+        return 1;
+    }
+
+  
+    memset(&event_mgr, 0, sizeof(opj_event_mgr_t));
+    event_mgr.error_handler = error_callback;
+    event_mgr.warning_handler = warning_callback;
+    event_mgr.info_handler = info_callback;
+
+	dinfo = mj2_create_decompress();
+        strcpy(outfilename,argv[2]);
+     
+
+	

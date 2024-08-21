@@ -1,0 +1,9 @@
+1. For now when relevant code statements based on data flow are given then it is able to predict the BO correctly
+
+2. It has some tolerance for non argument related statements which are not part of data flow 
+
+3. code and code1 are files that are example of statement 2
+
+4. sprintf is for some reason trained as not vulnerable at all 
+
+5. Overall needs more training including non-dataflow related statements as a part of the training, basically train using control flow
